@@ -1,5 +1,35 @@
 <h3 style="margin-top: 5%">Latest Rates and Calculate based on it.</h3>
 
+
+<p>Calculate how much your bitcoins worth based on the current prices.</p>
+<div class="row">
+    <div class="six columns">
+        <label for="holdingsInput">Bitcoins</label>
+        <input class="u-full-width" id="holdingsInput" type="text" ng-model="vm.holdingsInput" ng-change="vm.calculate()">
+    </div>
+    <div class="six columns">
+        <label for="units">BTC Units</label>
+        <input type="radio" name="units" id="btc" ng-model="vm.unitName" value="btc" ng-change="vm.calculate()">
+        BTC&nbsp;
+        <input type="radio" name="units" id="mbtc" ng-model="vm.unitName" value="mbtc" ng-change="vm.calculate()">
+        mBTC&nbsp;
+        <input type="radio" name="units" id="ubtc" ng-model="vm.unitName" value="ubtc" ng-change="vm.calculate()">
+        µBTC (bits)&nbsp;
+    </div>
+</div>
+<div class="row">
+    <div class="six columns">
+        <label for="holdingsBuy">Current Holdings (according to Buy)</label>
+        <input class="u-full-width" disabled id="holdingsBuy" type="text" ng-model="vm.holdingsBuy">
+    </div>
+    <div class="six columns">
+        <label for="holdingsSell">Current Holdings (according to Sell)</label>
+        <input class="u-full-width" disabled id="holdingsSell" type="text" ng-model="vm.holdingsSell">
+    </div>
+</div>
+
+<hr>
+
 <div class="row">
     <div class="six columns">
         <label for="buy">Current Price (Buy)</label>
@@ -13,44 +43,7 @@
 <div class="row">
     <div class="six columns">
         <button ng-click="vm.refresh()">Calculate</button>
-        <img ng-if="vm.reload" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="
+        <img ng-if="vm.reloading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="
         />
-    </div>
-</div>
-
-<hr>
-<p>Calculate how much your bitcoins worth based on the current prices.</p>
-<div class="row">
-    <div class="four columns">
-        <label for="holdingsInput">Bitcoins</label>
-        <input class="u-full-width" id="holdingsInput" type="text" ng-model="vm.holdings">
-    </div>
-    <div class="two columns">
-        <label for="bitcoin">BTC</label>
-        <input type="radio" name="units" id="btc" ng-model="vm.unitName" value="btc">
-    </div>
-    <div class="two columns">
-        <label for="millibtc">mBTC</label>
-        <input type="radio" name="units" id="mbtc" ng-model="vm.unitName" value="mbtc">
-    </div>
-    <div class="two columns">
-        <label for="millibtc">µBTC (bits)</label>
-        <input type="radio" name="units" id="ubtc" ng-model="vm.unitName" value="ubtc">
-    </div>
-    <div class="two columns">
-        <label for="calculateBtn">&nbsp;</label>
-        <button ng-click="vm.calculate()">Calculate</button>
-        <img ng-if="vm.calculating" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="
-        />
-    </div>
-</div>
-<div class="row">
-    <div class="six columns">
-        <label for="holdingsBuy">Current Holdings (according to Buy)</label>
-        <input class="u-full-width" disabled id="holdingsBuy" type="text" ng-model="vm.holdingsBuy">
-    </div>
-    <div class="six columns">
-        <label for="holdingsSell">Current Holdings (according to Sell)</label>
-        <input class="u-full-width" disabled id="holdingsSell" type="text" ng-model="vm.holdingsSell">
     </div>
 </div>
