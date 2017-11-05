@@ -1,46 +1,42 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="zebapp">
+
 <head>
 
-  <!-- Basic Page Needs
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <meta charset="utf-8">
-  <title>Your page title here :)</title>
-  <meta name="description" content="">
-  <meta name="author" content="">
+    <!-- Basic Page Needs -->
+    <meta charset="utf-8">
+    <title>Zebpay API Rates</title>
+    <meta name="description" content="">
+    <meta name="author" content="">
 
-  <!-- Mobile Specific Metas
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Mobile Specific Metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <!-- FONT
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+    <!-- FONT -->
+    <link href="//fonts.googleapis.com/css?family=Lato:400,300,600" rel="stylesheet" type="text/css">
 
-  <!-- CSS
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <link rel="stylesheet" href="css/normalize.css">
-  <link rel="stylesheet" href="css/skeleton.css">
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/skeleton.css">
 
-  <!-- Favicon
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <link rel="icon" type="image/png" href="images/favicon.png">
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="images/favicon.png">
+
+    <!-- JS -->
+    <script src="js/external/angular.min.js"></script>
+    <script src="js/external/angular-route.min.js"></script>
+    <script src="js/external/angular-cookies.min.js"></script>
+    <script src="js/app.js"></script>
 
 </head>
+
 <body>
-
-  <!-- Primary Page Layout
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <div class="container">
-    <div class="row">
-      <div class="one-half column" style="margin-top: 25%">
-        <h4>Basic Page</h4>
-        <p>This index.html page is a placeholder with the CSS, font and favicon. It's just waiting for you to add some content! If you need some help hit up the <a href="http://www.getskeleton.com">Skeleton documentation</a>.</p>
-      </div>
+    <div class="container">
+        <div ng-view></div>
     </div>
-  </div>
+    <script src="js/services/connection.service.js"></script>
+    <script src="js/controller/main.controller.js"></script>
 
-<!-- End Document
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
 </body>
+
 </html>
