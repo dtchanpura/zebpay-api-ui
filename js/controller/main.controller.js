@@ -53,8 +53,8 @@
         function calculate() {
             if (vm.buyValue !== undefined && vm.sellValue !== undefined && vm.holdingsInput !== undefined) {
                 vm.calculating = true;
-                var holdingsBuyBTC = vm.buyValue * parseInt(vm.holdingsInput);
-                var holdingsSellBTC = vm.sellValue * parseInt(vm.holdingsInput);
+                var holdingsBuyBTC = vm.buyValue * parseFloat(vm.holdingsInput);
+                var holdingsSellBTC = vm.sellValue * parseFloat(vm.holdingsInput);
                 switch (vm.unitName) {
                     case "btc":
                         vm.holdingsBuy = vm.currency + holdingsBuyBTC;
