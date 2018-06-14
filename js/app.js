@@ -1,10 +1,5 @@
 (function() {
     'use strict';
-    angular.module('zebapp', ['ngRoute','ngCookies'])
-        .config(config);
-    //.run(run);
-
-    config.$inject = ['$routeProvider', '$locationProvider'];
 
     function config($routeProvider, $locationProvider) {
         $routeProvider
@@ -18,4 +13,8 @@
             });
     }
 
+    config.$inject = ['$routeProvider', '$locationProvider'];
+
+    angular.module('zebapp', ['ngRoute','ngCookies'])
+        .config(config);
 })();
