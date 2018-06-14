@@ -12,7 +12,7 @@
             "mbtc": 1/1000,
             "ubtc": 1/1000000,
             "default": 0
-        }
+        };
 
         function calculate() {
             if (vm.buyValue === null || vm.sellValue === null || vm.holdingsInput === null) {
@@ -22,7 +22,7 @@
             vm.calculating = true;
             var holdingsBuyBTC = vm.buyValue * parseFloat(vm.holdingsInput);
             var holdingsSellBTC = vm.sellValue * parseFloat(vm.holdingsInput);
-            vm.unitName = unitNameScale[vm.unitName] !== undefined ? vm.unitName : "default";
+            vm.unitName = unitNameScale[vm.unitName] !== null ? vm.unitName : "default";
             vm.holdingsBuy = vm.currency + (holdingsBuyBTC * unitNameScale[vm.unitName]);
             vm.holdingsSell = vm.currency + (holdingsSellBTC * unitNameScale[vm.unitName]);
 
@@ -33,7 +33,7 @@
             vm.reloading = true;
             ConnectionService.GetDetails().then(function(response) {
                 vm.currency = "";
-                if (response !== undefined) {
+                if (response !== null) {
                     if (response.currency === "INR") {
                         vm.currency = '₹ ';
                     }
@@ -48,7 +48,7 @@
                 vm.reloading = false;
                 calculate();
             }, function(error) {
-                console.log(error);
+                // console.log(error);
                 vm.reloading = false;
             });
 
@@ -59,7 +59,7 @@
             // console.log("init.");
             vm.unitName = "btc";
             var queryParams = $location.search();
-            if (queryParams["holdings"] !== undefined || queryParams["unit"] !== undefined) {
+            if (queryParams["holdings"] !== null || queryParams["unit"] !== null) {
                 vm.holdingsInput = queryParams["holdings"];
                 vm.unitName = queryParams["unit"];
             }
@@ -71,9 +71,9 @@
 
     }
 
-    MainController.$inject = ['$location', '$cookies', 'ConnectionService'];
+    MainController.$inject = ["$location", "$cookies", "ConnectionService"];
 
     angular
-        .module('zebapp')
-        .controller('MainController', MainController);
+        .module("zebapp")
+        .controller("MainController", MainController);
 })();
