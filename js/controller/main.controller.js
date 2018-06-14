@@ -1,5 +1,5 @@
-(function() {
-    'use strict';
+var mainController = (function() {
+    "use strict";
 
     function MainController($location, $cookies, ConnectionService) {
         var vm = this;
@@ -9,20 +9,28 @@
 
         var unitNameScale = {
             "btc": 1,
-            "mbtc": 1/1000,
-            "ubtc": 1/1000000,
+            "mbtc": 1 / 1000,
+            "ubtc": 1 / 1000000,
             "default": 0
         };
 
         function calculate() {
-            if (vm.buyValue === null || vm.sellValue === null || vm.holdingsInput === null) {
-                // console.log("condition failed.");
+            if (vm.buyValue === null) {
+                return;
+            }
+            if (vm.sellValue === null) {
+                return;
+            }
+            if (vm.holdingsInput === null) {
                 return;
             }
             vm.calculating = true;
+
             var holdingsBuyBTC = vm.buyValue * parseFloat(vm.holdingsInput);
             var holdingsSellBTC = vm.sellValue * parseFloat(vm.holdingsInput);
-            vm.unitName = unitNameScale[vm.unitName] !== null ? vm.unitName : "default";
+
+            vm.unitName = unitNameScale[vm.unitName] !== null ? vm.unitName : "btc";
+
             vm.holdingsBuy = vm.currency + (holdingsBuyBTC * unitNameScale[vm.unitName]);
             vm.holdingsSell = vm.currency + (holdingsSellBTC * unitNameScale[vm.unitName]);
 
@@ -35,7 +43,7 @@
                 vm.currency = "";
                 if (response !== null) {
                     if (response.currency === "INR") {
-                        vm.currency = '₹ ';
+                        vm.currency = "₹ ";
                     }
                     vm.buyValue = response.buy;
                     vm.sellValue = response.sell;
