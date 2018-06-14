@@ -1,5 +1,5 @@
 # Zebpay API UI <sup>[1](#footnote1)</sup>
-UI for Zebpay API
+UI for Zebpay API available at https://dcpri.me/zebpay-api-ui
 
 ## Introduction
 
